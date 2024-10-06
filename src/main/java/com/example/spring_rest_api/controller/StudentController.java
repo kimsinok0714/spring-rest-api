@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class StudentController {
 
     /*
      * 전체 학생 목록 조회
-     * GET /students
+     * GET /api/v1/students
      * 200 OK
      */
     @GetMapping("/students")
@@ -37,7 +38,7 @@ public class StudentController {
 
     /*
      * 학생 정보 등록
-     * POST /students
+     * POST /api/v1/students
      * 201 CREATE
      */
     @PostMapping("/students")
@@ -49,7 +50,7 @@ public class StudentController {
 
     /*
      * 학생 상세 조회
-     * GET /students/{id}
+     * GET /api/v1/students/{id}
      * 200 OK
      */
     @GetMapping("/students/{id}")
@@ -60,12 +61,11 @@ public class StudentController {
         }
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
-    
-   
+       
 
     /*
      * 학생 정보 수정
-     * POST /students/{id}
+     * PUT /api/v1/students/{id}
      * 204 No Content
      */
     @PutMapping("/students/{id}")
@@ -77,13 +77,13 @@ public class StudentController {
 
     /*
      * 학생 정보 삭제
-     * POST /students/{id}
+     * DELETE /api/v1/students/{id}
      * 204 No Content
      */
-    @PostMapping("/students/{id}")
-    public ResponseEntity<Void> postMethodName(@PathVariable(value = "id") Long id) {
+    @DeleteMapping("/students/{id}")
+    public ResponseEntity<String> postMethodName(@PathVariable(value = "id") Long id) {
         studentService.deleteStudent(id);   
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
     
 
